@@ -44,9 +44,10 @@ Demo display website for the Raspberry Pi Weather Station HAT
 
   `ifconfig`
   
-  This IP address will be on the second line just after `inet addr:`
+  The IP address will be on the second line just after `inet addr:`
 1. Enter this IP address into the browser of another computer on the network followed by `/demo`:
 
   For example: `http://192.168.0.10/demo`
   
   A page should load showing various graphs. Note that wind direction is not shown.
+  The site will not work in Midori on the Raspberry Pi but it will work in [Epiphany](http://www.raspberrypi.org/web-browser-released/).
