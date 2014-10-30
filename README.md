@@ -20,11 +20,11 @@ Demo display website for the Raspberry Pi Weather Station HAT
 1. Download the flot JavaScript plotting library from [here](http://www.flotcharts.org/):
 
   ```
-  cd js
+  cd demo/js
   wget http://www.flotcharts.org/downloads/flot-0.8.3.zip
   unzip flot-0.8.3.zip
   ```
-1. Return to the demo folder root.
+1. Return to the demo site root.
 
   `cd ..`
   
