@@ -24,6 +24,22 @@ Demo display website for the Raspberry Pi Weather Station HAT
   wget http://www.flotcharts.org/downloads/flot-0.8.3.zip
   unzip flot-0.8.3.zip
   ```
+1. Return to the demo folder root.
+
+  `cd ..`
+  
+  You should now be in `/var/www/demo`
+  
+1. Update the the php script with the MySQL database credentials that you chose during the deployment of the data logging code.
+
+  `nano data.php`
+  
+  Find the line: `$con=mysqli_connect("localhost","root","raspberry","weather");`
+  
+  Update `raspberry` to the password that you chose.
+  
+  Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
+
 1. Find the weather station's ip address:
 
   `ifconfig`
@@ -32,3 +48,5 @@ Demo display website for the Raspberry Pi Weather Station HAT
 1. Enter this IP address into the browser of another computer on the network followed by `/demo`:
 
   For example: `http://192.168.0.10/demo`
+  
+  A page should load showing various graphs. Note that wind direction is not shown.
