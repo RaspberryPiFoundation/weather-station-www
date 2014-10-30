@@ -51,3 +51,5 @@ Demo display website for the Raspberry Pi Weather Station HAT
   
   A page should load showing various graphs. Note that wind direction is not shown.
   The site will not work in Midori on the Raspberry Pi but it will work in [Epiphany](http://www.raspberrypi.org/web-browser-released/).
+  
+  You can drag the graph left or right with the left mouse button or zoom in and out with the mouse wheel.
