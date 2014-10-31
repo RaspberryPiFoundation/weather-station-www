@@ -49,7 +49,7 @@ Demo display website for the Raspberry Pi Weather Station HAT
   The IP address will be on the second line just after `inet addr:`
 1. Enter this IP address into a browser followed by `/demo`. For example:
 
-  - `http://192.168.0.10/demo`
+  - `http://192.168.0.X/demo`
   
   A page should load showing various graphs. Note that wind direction is not shown.
   The site will not work in Midori on the Raspberry Pi but it will work in [Epiphany](http://www.raspberrypi.org/web-browser-released/).
@@ -58,15 +58,15 @@ Demo display website for the Raspberry Pi Weather Station HAT
 
 1. If you prefer to work in Microsoft Office (or equivalent) the data can be extracted in CSV form and imported directly. Enter the weather station's IP address into the browser followed by `/demo/csv.php`. For example:
 
-  - `http://192.168.0.10/demo/csv.php`
+  - `http://192.168.0.X/demo/csv.php`
   
   Your browser will offer you a CSV file download which will contain a complete dump of all data in the MySQL database.
 1. It is also possible to specify a data range to select records for inclusion in the CSV file. This is done by specifying a `from` and or `to` parameter on the query string.
 
   The date format is: `"YYYY-MM-DD HH:MM:SS"`. Time parameters must be enclosed in double quotes. For example:
 
-  - `http://192.168.0.10/demo/csv.php?from="2014-01-01"`
-  - `http://192.168.0.10/demo/csv.php?to="2014-12-31 23:59:59"`
-  - `http://192.168.0.10/demo/csv.php?from="2014-01-01"&to="2015-01-01 12:00:00"`
+  - `http://192.168.0.X/demo/csv.php?from="2014-01-01"`
+  - `http://192.168.0.X/demo/csv.php?to="2014-12-31 23:59:59"`
+  - `http://192.168.0.X/demo/csv.php?from="2014-01-01"&to="2015-01-01 12:00:00"`
 
   If you leave out the `from` and `to` parameters (as in the previous step) then it does a complete dump of all data in the MySQL database.
