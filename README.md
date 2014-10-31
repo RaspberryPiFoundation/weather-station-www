@@ -47,7 +47,7 @@ Demo display website for the Raspberry Pi Weather Station HAT
   `ifconfig`
   
   The IP address will be on the second line just after `inet addr:`
-1. Enter this IP address into a browser followed by `/demo`:
+1. Enter this IP address into a browser followed by `/demo`. For example:
 
   - `http://192.168.0.10/demo`
   
@@ -56,7 +56,7 @@ Demo display website for the Raspberry Pi Weather Station HAT
   
   You can drag the graph left or right with the left mouse button or zoom in and out with the mouse wheel.
 
-1. If you prefer to work in Microsoft Office (or equivalent) the data can be extracted in CSV form and imported directly. Enter the weather station's IP address into the browser followed by `/demo/csv.php`:
+1. If you prefer to work in Microsoft Office (or equivalent) the data can be extracted in CSV form and imported directly. Enter the weather station's IP address into the browser followed by `/demo/csv.php`. For example:
 
   - `http://192.168.0.10/demo/csv.php`
   
