@@ -61,7 +61,7 @@ Demo display website for the Raspberry Pi Weather Station HAT
   - `http://192.168.0.X/demo/csv.php`
   
   Your browser will offer you a CSV file download which will contain a complete dump of all data in the MySQL database.
-1. It is also possible to specify a data range to select records for inclusion in the CSV file. This is done by specifying a `from` and or `to` parameter on the query string.
+1. It is also possible to specify a date range to select records for inclusion in the CSV file. This is done by specifying a `from` and or `to` date parameter on the query string.
 
   The date format is: `"YYYY-MM-DD HH:MM:SS"`. Time parameters must be enclosed in double quotes. For example:
 
