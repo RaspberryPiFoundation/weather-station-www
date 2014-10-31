@@ -39,17 +39,33 @@ Demo display website for the Raspberry Pi Weather Station HAT
   Update `raspberry` to the password that you chose.
   
   Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
+  
+1. Repeat the previous step for `csv.php`.
 
 1. Find the weather station's ip address:
 
   `ifconfig`
   
   The IP address will be on the second line just after `inet addr:`
-1. Enter this IP address into the browser of another computer on the network followed by `/demo`:
+1. Enter this IP address into a browser followed by `/demo`:
 
-  For example: `http://192.168.0.10/demo`
+  - `http://192.168.0.10/demo`
   
   A page should load showing various graphs. Note that wind direction is not shown.
   The site will not work in Midori on the Raspberry Pi but it will work in [Epiphany](http://www.raspberrypi.org/web-browser-released/).
   
   You can drag the graph left or right with the left mouse button or zoom in and out with the mouse wheel.
+
+1. If you prefer to work in Microsoft Office (or equivalent) the data can be extracted in CSV form and imported directly. Enter the weather station's IP address into the browser followed by `/demo/csv.php`:
+
+  - `http://192.168.0.10/demo/csv.php`
+  
+  Your browser will offer you a CSV file download which will contain a complete dump of all data in the MySQL database. It is also possible to specify a data range to select records for inclusion in the CSV file. This is done by specifying a `from` and or `to` parameter on the query string.
+
+  - `http://192.168.0.10/demo/csv.php?from="2014-01-01 12:00:00"`
+  - `http://192.168.0.10/demo/csv.php?to="2014-12-31 23:59:59"`
+  - `http://192.168.0.10/demo/csv.php?from="2014-01-01 12:00:00"&to="2014-12-31 23:59:59"`
+  
+  
+
+
