@@ -25,6 +25,7 @@ while ($property = mysqli_fetch_field($result)) {
 }
 
 $fp = fopen("php://output", "w");
+ob_start();
 
 // Double quotes should enclose headers to avoid Microsoft Excel complaining a lot when you load the CSV
 // Annoyingly can't use: fputcsv($fp, $headers) for this. Any double quotes are double escaped as """"
@@ -47,6 +48,7 @@ while ($row = $result->fetch_array(MYSQLI_NUM)) {
     fputcsv($fp, array_values($row));
 }
 
+$string = ob_get_clean();
 $filename = "weather_csv_" . date("Ymd") . "_" . date("His");
 
 header("Pragma: public");
@@ -59,4 +61,5 @@ header("Content-Disposition: attachment; filename=\"$filename.csv\";" );
 header("Content-Transfer-Encoding: binary");
 
 mysqli_close($con);
+exit($string);
 ?>
