@@ -1,7 +1,7 @@
 <?php
 $con=mysqli_connect("localhost","root","raspberry","weather");
-$select_all_template = "SELECT * FROM WEATHER_MEASUREMENT;";
-$select_from_to_template = "SELECT * FROM WEATHER_MEASUREMENT WHERE CREATED >= %s AND CREATED <= %s;";
+$select_all_template = "SELECT *, DATE(CREATED) AS DATE, TIME(CREATED) AS TIME FROM WEATHER_MEASUREMENT;";
+$select_from_to_template = "SELECT *, DATE(CREATED) AS DATE, TIME(CREATED) AS TIME FROM WEATHER_MEASUREMENT WHERE CREATED >= %s AND CREATED <= %s;";
 $select = "";
 
 $time_from = $_GET["from"];
