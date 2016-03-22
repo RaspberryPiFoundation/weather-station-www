@@ -1,67 +1,74 @@
 Weather Station Demo Website
 ========================
 
-Demo display website for the Raspberry Pi Weather Station HAT
+This tutorial will show you how to create a simple website showing graphs of the Raspberry Pi Weather Station data.
 
-## Instructions to deploy
+## Get the data logging code
 
-1. First deploy the weather station data logging code from [here](https://github.com/raspberrypi/weather-station).
+1. You will need root access on the Raspberry Pi. From the command line type:
 
-1. Drop into root on the weather station's command prompt:
+    `sudo -s`
 
-  `sudo -s`
-1. Change to the www folder:
+1. Navigate to the web folder:
 
-  `cd /var/www`
-1. Clone this github repository into a folder named `demo`:
+    `cd /var/www/html`
 
-  `git clone https://github.com/raspberrypi/weather-station-www.git demo`
+1. Download the files to a folder named `demo`:
+
+    `git clone https://github.com/raspberrypi/weather-station-www.git demo`
   
-1. Download the flot JavaScript plotting library from [here](http://www.flotcharts.org/):
+1. Download and unzip the [flot](http://www.flotcharts.org/) JavaScript plotting library:
 
-  ```
-  cd demo/js
-  wget http://www.flotcharts.org/downloads/flot-0.8.3.zip
-  unzip flot-0.8.3.zip
-  ```
+    `cd demo/js`
+
+    `wget http://www.flotcharts.org/downloads/flot-0.8.3.zip`
+
+    `unzip flot-0.8.3.zip`
+
+
 1. Return to the demo site root.
 
-  `cd ..`
-  
-  You should now be in `/var/www/demo`
-  
-1. Update the the php script with the MySQL database credentials that you chose during the deployment of the data logging code.
+    `cd ..`
 
-  `nano data.php`
+You should now be in `/var/www/html/demo`
+
+## Set up and connect
   
-  Find the line: `$con=mysqli_connect("localhost","root","raspberry","weather");`
+1. Update the the php script with the MySQL password that you chose when installing the database.
+
+    `nano data.php`
   
-  Update `raspberry` to the password that you chose.
+    Find the line: `$con=mysqli_connect("localhost","root","raspberry","weather");`
   
-  Press `Ctrl - O` then `Enter` to save and `Ctrl - X` to quit nano.
+    Update `raspberry` to the password that you chose.
+  
+    Press `Ctrl O` then `Enter` to save and `Ctrl X` to quit nano.
   
 1. Repeat the previous step for `csv.php`.
 
 1. Find the weather station's ip address:
 
-  `ifconfig`
+    `ifconfig`
   
   The IP address will be on the second line just after `inet addr:`
-1. Enter this IP address into a browser followed by `/demo`. For example:
+
+Enter this IP address into a browser followed by `/demo`. For example:
 
   - `http://192.168.0.X/demo`
   
   A page should load showing various graphs. Note that wind direction is not shown.
-  The site will not work in Midori on the Raspberry Pi but it will work in [Epiphany](http://www.raspberrypi.org/web-browser-released/).
+  
   
   You can drag the graph left or right with the left mouse button or zoom in and out with the mouse wheel.
 
-1. If you prefer to work in Microsoft Office (or equivalent) the data can be extracted in CSV form and imported directly. Enter the weather station's IP address into the browser followed by `/demo/csv.php`. For example:
+## Downloading data
+If you prefer to work in Microsoft Office (or equivalent) the data can be extracted in CSV form and imported directly. Enter the weather station's IP address into the browser followed by `/demo/csv.php`. For example:
 
   - `http://192.168.0.X/demo/csv.php`
   
   Your browser will offer you a CSV file download which will contain a complete dump of all data in the MySQL database.
-1. It is also possible to specify a date range to select records for inclusion in the CSV file. This is done by specifying a `from` and or `to` date parameter on the query string.
+
+It is also possible to specify a date range to select records for inclusion in the CSV file. This is done by specifying a `from` and or `to` date parameter on the query string.
 
   The date format is: `"YYYY-MM-DD HH:MM:SS"`. Time parameters must be enclosed in double quotes. For example:
 
