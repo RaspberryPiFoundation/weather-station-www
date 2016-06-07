@@ -9,7 +9,7 @@ if ($column_name == "MSL_PRESSURE"){
     $altitude = 112.2; // metres
 }
 if ($column_name == "AMBIENT_TEMPERATURE" or $column_name == "GROUND_TEMPERATURE") {
-    $farenheit = 1;
+    $fahrenheit = 1;
 }
 if ($column_name == "WIND_SPEED" or $column_name == "WIND_GUST_SPEED") {
     $miles = 1;
@@ -40,10 +40,10 @@ while($row = mysqli_fetch_array($result)) {
          $msl_value = $air_value/(pow(1-($altitude/44330.0),5.255));
          $row[$column_name] = $msl_value;
     }
-    if ($farenheit) {
+    if ($fahrenheit) {
          $temp = floatval($row[$column_name]);
-         $faren_value = (($temp / 5.0) * 9.0) + 32;
-         $row[$column_name] = $faren_value;
+         $fahren_value = (($temp / 5.0) * 9.0) + 32;
+         $row[$column_name] = $fahren_value;
     }
     if ($miles) {
          $speed = floatval($row[$column_name]);
