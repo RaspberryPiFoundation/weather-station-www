@@ -40,20 +40,26 @@
 			{title: "Rainfall, mm", col: "RAINFALL"} 
 			]
 
-		var $update_plot = function(plot, $ph, col, timeout) {
-			var axes = plot.getAxes();
-			var mysql_from = (axes.xaxis.min / 1000).toFixed(0);
-			var mysql_to = (axes.xaxis.max / 1000).toFixed(0);
+                var $update_plot = function(plot, $ph, col, timeout) {
+                        var axes = plot.getAxes();
+                        var mysql_from = (axes.xaxis.min / 1000).toFixed(0);
+                        var mysql_to = (axes.xaxis.max / 1000).toFixed(0);
+                        var WD_yaxis = {yaxis: { min:0, max: 360, tickSize: 45}};
 
-			var on_data_received = function(data) {
-				var opts = $.extend({}, flot_defaults);
-				opts.xaxis.min = axes.xaxis.min;
-				opts.xaxis.max = axes.xaxis.max;
+                        var on_data_received = function(data) {
+                                var opts = $.extend({}, flot_defaults);
+                                if (col.col == "WIND_DIRECTION")
+                                {
+                                        var WD_opts = $.extend(opts, WD_yaxis);
+                                        opts = WD_opts;
+                                }
+                                opts.xaxis.min = axes.xaxis.min;
+                                opts.xaxis.max = axes.xaxis.max;
 
-				$.plot($ph, [data], opts);
-			};
+                                $.plot($ph, [data], opts);
+                        };
 
-			$.ajax({
+                        $.ajax({
 				url: "./data.php?col=" + col.col + "&from=" + mysql_from + "&to=" + mysql_to,
 				type: "GET",
 				dataType: "json",
