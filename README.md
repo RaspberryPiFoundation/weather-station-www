@@ -3,6 +3,20 @@ Weather Station Demo Website
 
 This tutorial will show you how to create a simple website showing graphs of the Raspberry Pi Weather Station data.
 
+## Install prerequisites
+
+1. Install the Apache2 package with the following command:
+
+    `sudo apt-get install apache2 -y`
+
+1. Install PHP5 and the PHP module for Apache
+
+    `sudo apt-get install php5 libapache2-mod-php5 -y`
+
+1. Install the MySQL DLL's for PHP5 
+
+    `sudo apt-get install php5-mysql -y`
+
 ## Get the data logging code
 
 1. You will need root access on the Raspberry Pi. From the command line type:
