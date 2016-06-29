@@ -54,7 +54,7 @@
 			};
 
 			$.ajax({
-				url: "./data.php?col=" + col.col + "&from=" + mysql_from + "&to=" + mysql_to,
+				url: "./data.imperial.php?col=" + col.col + "&from=" + mysql_from + "&to=" + mysql_to,
 				type: "GET",
 				dataType: "json",
 				success: on_data_received
