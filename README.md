@@ -7,15 +7,16 @@ This tutorial will show you how to create a simple website showing graphs of the
 
 1. Install the Apache2 package with the following command:
 
-    `sudo apt-get install apache2 -y`
+    `sudo apt update`
+    `sudo apt install apache2 -y`
 
 1. Install PHP5 and the PHP module for Apache
 
-    `sudo apt-get install php5 libapache2-mod-php5 -y`
+    `sudo apt install php5 libapache2-mod-php7.0  -y`
 
-1. Install the MySQL DLL's for PHP5 
+1. Install the MySQL connector for PHP7.0 
 
-    `sudo apt-get install php5-mysql -y`
+    `sudo apt install php7.0-mysql -y`
 
 ## Get the data logging code
 
@@ -29,7 +30,7 @@ This tutorial will show you how to create a simple website showing graphs of the
 
 1. Download the files to a folder named `demo`:
 
-    `git clone https://github.com/raspberrypi/weather-station-www.git demo`
+    `git clone https://github.com/RaspberryPiFoundation/weather-station-www demo`
   
 1. Download and unzip the [flot](http://www.flotcharts.org/) JavaScript plotting library:
 
@@ -52,9 +53,9 @@ You should now be in `/var/www/html/demo`
 
     `nano data.php`
   
-    Find the line: `$con=mysqli_connect("localhost","root","raspberry","weather");`
+    Find the line: `$con=mysqli_connect("localhost","weather","WeatherMySQLPasswd","weather");`
   
-    Update `raspberry` to the password that you chose.
+    Update `weather` to your userid and `WeatherMqSQLPasswd` to the password that you chose.
   
     Press `Ctrl O` then `Enter` to save and `Ctrl X` to quit nano.
   
@@ -86,8 +87,8 @@ It is also possible to specify a date range to select records for inclusion in t
 
   The date format is: `"YYYY-MM-DD HH:MM:SS"`. Time parameters must be enclosed in double quotes. For example:
 
-  - `http://192.168.0.X/demo/csv.php?from="2014-01-01"`
-  - `http://192.168.0.X/demo/csv.php?to="2014-12-31 23:59:59"`
-  - `http://192.168.0.X/demo/csv.php?from="2014-01-01"&to="2015-01-01 12:00:00"`
+  - `http://192.168.0.X/demo/csv.php?from="2018-11-17"`
+  - `http://192.168.0.X/demo/csv.php?to="2018-12-31 23:59:59"`
+  - `http://192.168.0.X/demo/csv.php?from="2018-01-01"&to="2019-01-01 12:00:00"`
 
   If you leave out the `from` and `to` parameters (as in the previous step) then it does a complete dump of all data in the MySQL database.
