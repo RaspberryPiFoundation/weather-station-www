@@ -32,26 +32,62 @@
 			{title: "Ambient temperature,°F", col: "AMBIENT_TEMPERATURE"}, 
 			{title: "Ground temperature,°F", col: "GROUND_TEMPERATURE"}, 
 			{title: "Air quality, %", col: "AIR_QUALITY"}, 
-			{title: "Air pressure, hPa", col: "AIR_PRESSURE"}, 
-			{title: "MSL pressure, hPa", col: "MSL_PRESSURE"}, 
+			{title: "Air pressure, inHg", col: "AIR_PRESSURE"}, 
+			{title: "MSL pressure, inHg", col: "MSL_PRESSURE"}, 
 			{title: "Relative humidity, %", col: "HUMIDITY"}, 
 			{title: "Wind speed, mph", col: "WIND_SPEED"}, 
 			{title: "Wind gust speed, mph", col: "WIND_GUST_SPEED"},
 			{title: "Rainfall, in", col: "RAINFALL"} 
 			]
 
-		var $update_plot = function(plot, $ph, col, timeout) {
-			var axes = plot.getAxes();
-			var mysql_from = (axes.xaxis.min / 1000).toFixed(0);
-			var mysql_to = (axes.xaxis.max / 1000).toFixed(0);
+                var $update_plot = function(plot, $ph, col, timeout) {
+                        var axes = plot.getAxes();
+                        var mysql_from = (axes.xaxis.min / 1000).toFixed(0);
+                        var mysql_to = (axes.xaxis.max / 1000).toFixed(0);
+                        var WD_yaxis = {yaxis: { min:0, max: 360, tickSize: 45}};
 
-			var on_data_received = function(data) {
-				var opts = $.extend({}, flot_defaults);
-				opts.xaxis.min = axes.xaxis.min;
-				opts.xaxis.max = axes.xaxis.max;
+                        var on_data_received = function(data) {
+                                var opts = $.extend({}, flot_defaults);
+                                if (col.col == "WIND_DIRECTION")
+                                {
+                                        var WD_opts = $.extend(opts, WD_yaxis);
+                                        opts = WD_opts;
+                                }
 
-				$.plot($ph, [data], opts);
-			};
+				if (col.col == "RAINFALL")
+				{
+					var rainFall = "rainfall.imperial.php";
+					$.getJSON(rainFall, function(data) {
+						var items = [];
+						items.push("<tr>");
+						for (i=0;i<=5;i++)
+						{
+							items.push("<th style=\"text-align:center\">&nbsp;Hour</th><th style=\"text-align:right\">&nbsp;&nbsp;Rainfall&nbsp;</th>");
+						}
+						items.push("<tr>");
+						$.each(data, function(i, item) {
+							items.push("<td style=\"text-align:center\">&nbsp;"+item.hour+"</td><td style=\"text-align:right\">"+item.daily_rainfall+"in&nbsp;</td>");
+							if (
+								i == 5 |
+							 	i == 11 |
+							       	i == 17
+								) {
+									items.push("<tr>");
+								}
+						})
+						var $raincoat = $("#content");
+						var $rain = $("<table/>");
+						$rain.addClass("rain-coat");
+						$rain.attr("style", "margin-left:auto; margin-right: auto;")
+						$rain.append(items.join(""))
+						$raincoat.append($rain);
+					})
+			       	}
+			       	opts.xaxis.min = axes.xaxis.min;
+                                opts.xaxis.max = axes.xaxis.max;
+
+                                $.plot($ph, [data], opts);
+                        };
 
 			$.ajax({
 				url: "./data.imperial.php?col=" + col.col + "&from=" + mysql_from + "&to=" + mysql_to,

@@ -1,12 +1,12 @@
 <?php
 header('Content-Type: application/json');
-$con=mysqli_connect("localhost","root","raspberry","weather");
+$con=mysqli_connect("localhost","weather","WeatherMySQLPasswd","weather");
 $column_name = $_GET["col"];
 $msl = 0;
 if ($column_name == "MSL_PRESSURE"){
     $column_name = "AIR_PRESSURE";
     $msl = 1;
-    $altitude = 112.2; // metres
+    $altitude = 122.2; // metres
 }
 
 $time_from = $_GET["from"];
@@ -35,7 +35,7 @@ while($row = mysqli_fetch_array($result)) {
     $rows[] = array( $time_unix, floatval($row[$column_name]) );
 }
 
+mysqli_commit($con);
 echo json_encode($rows);
-
 mysqli_close($con);
 ?>
