@@ -7,14 +7,13 @@ This tutorial will show you how to create a simple website showing graphs of the
 
 1. Install the Apache2 package with the following command:
 
-    `sudo apt update`
     `sudo apt install apache2 -y`
 
-1. Install PHP5 and the PHP module for Apache
+1. Install PHP7.0 and the PHP module for Apache
 
-    `sudo apt install php5 libapache2-mod-php7.0  -y`
+    `sudo apt install php7.0 libapache2-mod-php7.0 -y`
 
-1. Install the MySQL connector for PHP7.0 
+1. Install the MySQL connector for PHP5 
 
     `sudo apt install php7.0-mysql -y`
 
@@ -55,7 +54,7 @@ You should now be in `/var/www/html/demo`
   
     Find the line: `$con=mysqli_connect("localhost","weather","WeatherMySQLPasswd","weather");`
   
-    Update `weather` to your userid and `WeatherMqSQLPasswd` to the password that you chose.
+    Update the userid `waether` to your MySQL userid and `WeatherMySQLPasswd` to the password that you chose.
   
     Press `Ctrl O` then `Enter` to save and `Ctrl X` to quit nano.
   
@@ -87,7 +86,7 @@ It is also possible to specify a date range to select records for inclusion in t
 
   The date format is: `"YYYY-MM-DD HH:MM:SS"`. Time parameters must be enclosed in double quotes. For example:
 
-  - `http://192.168.0.X/demo/csv.php?from="2018-11-17"`
+  - `http://192.168.0.X/demo/csv.php?from="2018-01-01"`
   - `http://192.168.0.X/demo/csv.php?to="2018-12-31 23:59:59"`
   - `http://192.168.0.X/demo/csv.php?from="2018-01-01"&to="2019-01-01 12:00:00"`
 

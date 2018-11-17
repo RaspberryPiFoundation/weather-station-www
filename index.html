@@ -10,6 +10,11 @@
 	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.time.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.navigate.js"></script>
 	<script type="text/javascript">
+	function pad(hour, digits) {
+		var zero = digits - hour.toString().length +1;
+		return Array(+(zero > 0 && zero)).join("0")+hour;
+	}
+
 	$(function(){
 		var time_now = Date.now();
 		flot_defaults = { 
@@ -18,7 +23,7 @@
 				minTickSize: [1, "hour"],
 				min: time_now - 86400000, //Last 24 hours
 				max: time_now,
-				twelveHourClock: true
+				twelveHourClock: false
 			},
 			pan: {
 				interactive: true
@@ -54,7 +59,37 @@
                                         var WD_opts = $.extend(opts, WD_yaxis);
                                         opts = WD_opts;
                                 }
-                                opts.xaxis.min = axes.xaxis.min;
+
+				if (col.col == "RAINFALL")
+				{
+					var rainFall = "rainfall.php";
+					$.getJSON(rainFall, function(data) {
+						var items = [];
+						items.push("<tr>");
+						for (i=0;i<=5;i++)
+						{
+							items.push("<th style=\"text-align:center\">&nbsp;Hour</th><th style=\"text-align:right\">&nbsp;&nbsp;Rainfall&nbsp;</th>");
+						}
+						items.push("<tr>");
+						$.each(data, function(i, item) {
+							items.push("<td style=\"text-align:center\">&nbsp;"+pad(item.hour,2)+":00</td><td style=\"text-align:right\">"+item.daily_rainfall+"cm&nbsp;</td>");
+							if (
+								i == 5 |
+							 	i == 11 |
+							       	i == 17
+								) {
+									items.push("<tr>");
+								}
+						})
+						var $raincoat = $("#content");
+						var $rain = $("<table/>");
+						$rain.addClass("rain-coat");
+						$rain.attr("style", "margin-left:auto; margin-right: auto;")
+						$rain.append(items.join(""))
+						$raincoat.append($rain);
+					})
+			       	}
+			       	opts.xaxis.min = axes.xaxis.min;
                                 opts.xaxis.max = axes.xaxis.max;
 
                                 $.plot($ph, [data], opts);

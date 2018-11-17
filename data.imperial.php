@@ -3,6 +3,10 @@ header('Content-Type: application/json');
 $con=mysqli_connect("localhost","weather","WeatherMySQLPasswd","weather");
 $column_name = $_GET["col"];
 $msl = 0;
+$miles = 0;
+$inHg = 0;
+$fahrenheit = 0;
+$rain_inches = 1;
 if ($column_name == "MSL_PRESSURE"){
     $column_name = "AIR_PRESSURE";
     $msl = 1;
@@ -17,6 +21,9 @@ if ($column_name == "WIND_SPEED" or $column_name == "WIND_GUST_SPEED") {
 if ($column_name == "RAINFALL") {
     $rain_inches = 1;
 } 
+if ($column_name == "AIR_PRESSURE"){
+    $inHg = 1;
+}
 
 $time_from = $_GET["from"];
 $time_to = $_GET["to"];
@@ -54,6 +61,9 @@ while($row = mysqli_fetch_array($result)) {
          $fall_mm = floatval($row[$column_name]);
          $fall_inches = $fall_mm / 2.54;
          $row[$column_name] = $fall_inches;
+    }
+    if ($inHg) {
+         $row[$column_name] = $row[$column_name] * 0.029529983071445;
     }
 
     $rows[] = array( $time_unix, floatval($row[$column_name]) );
